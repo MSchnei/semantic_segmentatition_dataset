@@ -1,11 +1,15 @@
-#### Description: Reorient ground truth image to match anat images
+#### Description: Reorient ground truth image and masks to match anat images
 #### To be set:
 ####    -path to parent directory,
 ####    -subject names
 #### Input:
 ####    -ground truth image in original orientation
+####    -brain mask image in original orientation
+####    -nosub image in original orientation
 #### Output:
 ####    -ground truth image in reoriented orientation
+####    -brain mask image in reoriented orientation
+####    -nosub image in reoriented orientation
 #### Written by: Marian Schneider, Faruk Gulban
 
 # set analysis path
@@ -24,13 +28,20 @@ subjLen=${#app[@]}
 for (( i=0; i<${subjLen}; i++ )); do
 	# derive particular subject name
   subj=${app[i]}
-  # give path to file with proper nii header
-  file_header_proper="${analysis_path}/${subj}/anat/${subj}_t1_defaced2"
-  # give path to file with broken nii header after correction
-  file_header_broken="${analysis_path}/derivatives/${subj}/ground_truth/${subj}_gm"
-  # create a copy of the broken file header
-  file_header_broken_cp="${file_header_broken}_reoriented"
-  cp ${file_header_broken}_v*.nii.gz ${file_header_broken_cp}.nii.gz
+  # give path to ground truth image that should be reoriented
+  file_header_broken="${analysis_path}/derivatives/${subj}/ground_truth/${subj}_gm_v*"
   # reorient image
-  fslswapdim ${file_header_broken_cp} AP SI LR ${file_header_broken_cp}
+  fslswapdim ${file_header_broken} AP SI LR ${file_header_broken}
+	# give path to brain mask image that should be reoriented
+  file_header_broken="${analysis_path}/derivatives/${subj}/masks/${subj}_brain_mask"
+  # reorient image
+  fslswapdim ${file_header_broken} AP SI LR ${file_header_broken}
+	# give path to nosub mask image that should be reoriented
+  file_header_broken="${analysis_path}/derivatives/${subj}/masks/${subj}_brain_mask_nosub"
+  # reorient image
+  fslswapdim ${file_header_broken} AP SI LR ${file_header_broken}
+	# give path to T2 star artifact mask
+  file_header_broken="${analysis_path}/derivatives/${subj}/masks/${subj}_artifact_mask_T2star"
+  # reorient image
+  fslswapdim ${file_header_broken} AP SI LR ${file_header_broken}
 done
