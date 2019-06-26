@@ -12,22 +12,22 @@
 #### Written by: Marian Schneider, Faruk Gulban
 
 # set analysis path
-analysis_path="${parent_path}/data/shared_data/data_mp2rage"
+analysis_path="${parent_path}/data/shared_data/data_mprage"
 
 # list all subject names
 declare -a app=(
-	"sub-001"
-	"sub-013"
-	"sub-014"
-	"sub-019"
+		"sub-02"
+		"sub-03"
+		"sub-05"
+		"sub-06"
+		"sub-07"
                 )
 
 # list all image names
 declare -a imas=(
-	"_inv1"
-	"_inv2"
-	"_uni"
-	"_t1"
+		"_T1w"
+		"_PD"
+		"_T2star"
                 )
 
 # unzip T1wDivPD image for all subjects
@@ -46,7 +46,7 @@ for (( i=0; i<${subjLen}; i++ )); do
 		# derive particular image name
 		ima=${imas[j]}
 		# set input and output names for copying operation
-	  input="${analysis_path}/${subj}/anat/${subj}${ima}_defaced*.nii.gz"
+	  input="${analysis_path}/${subj}/anat/${subj}${ima}_defaced.nii.gz"
 		output="${analysis_path}/derivatives/${subj}/unbiased/${subj}${ima}_unbiased.nii.gz"
 		# copy gz file into SPM directory
 		command="cp ${input} ${output}"
@@ -56,9 +56,9 @@ for (( i=0; i<${subjLen}; i++ )); do
 		gunzip ${output}
 	done
 
-	# repeat the same for the t2star image
-	input="${analysis_path}/derivatives/${subj}/t2star/${subj}_t2s_map_resliced_defaced.nii.gz"
-	output="${analysis_path}/derivatives/${subj}/unbiased/${subj}_t2s_unbiased.nii.gz"
+	# repeat the same for the division image
+	input="${analysis_path}/derivatives/${subj}/ratios/${subj}_T1wDivPD_defaced.nii.gz"
+	output="${analysis_path}/derivatives/${subj}/unbiased/${subj}_T1wDivPD_unbiased.nii.gz"
 	# copy gz file into SPM directory
 	command="cp ${input} ${output}"
 	echo "${command}"

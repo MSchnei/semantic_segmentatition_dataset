@@ -16,16 +16,16 @@ analysis_path="${parent_path}/data/shared_data/data_mp2rage"
 
 # list all subject names
 declare -a app=(
-		"sub-001"
-		"sub-013"
-		"sub-014"
+		# "sub-001"
+		# "sub-013"
+		# "sub-014"
 		"sub-019"
                 )
 
 # list all image names
 declare -a imas=(
-	"_inv1"
-	"_inv2"
+	# "_inv1"
+	# "_inv2"
 	"_uni"
 	"_t1"
 	"_t2s"
