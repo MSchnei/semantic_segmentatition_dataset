@@ -31,14 +31,34 @@ for (( i=0; i<${subjLen}; i++ )); do
 	# call to fslmaths
   command="fslmaths "
 	# specify path to mask
-  command+="${analysis_path}/derivatives/${subj}/masks/${subj}_brain_mask "
+  command+="${analysis_path}/derivatives/${subj}/masks/${subj}_brain_mask_nosub "
+	# subtract
+  command+="-mas "
+	# set path to sub-mask
+  command+="${analysis_path}/derivatives/${subj}/segmentations/${subj}_brain_mask_v* "
+	# specify output name
+  command+="${analysis_path}/derivatives/${subj}/masks/${subj}_brain_mask_nosub_tmp"
+	# run mask command
+  echo "${command}"
+  ${command}
+
+	# call to fslmaths
+  command="fslmaths "
+	# specify path to mask
+	command+="${analysis_path}/derivatives/${subj}/segmentations/${subj}_brain_mask_v* "
 	# subtract
   command+="-sub "
-	# set path to sub-mask
-  command+="${analysis_path}/derivatives/${subj}/masks/${subj}_brain_mask_nosub "
+	# set path to temporary sub-mask
+  command+="${analysis_path}/derivatives/${subj}/masks/${subj}_brain_mask_nosub_tmp "
 	# specify output name
   command+="${analysis_path}/derivatives/${subj}/masks/${subj}_nosub_mask"
 	# run subtraction command
   echo "${command}"
   ${command}
+
+	# remove temporary file (_brain_mask_nosub_tmp)
+	rm -rf  ${analysis_path}/derivatives/${subj}/masks/${subj}_brain_mask_nosub_tmp.nii.gz
+	# copy _nosub_mask to segmentations
+	cp ${analysis_path}/derivatives/${subj}/masks/${subj}_nosub_mask.nii.gz ${analysis_path}/derivatives/${subj}/segmentations/${subj}_sub_mask_v01.nii.gz
+
 done
