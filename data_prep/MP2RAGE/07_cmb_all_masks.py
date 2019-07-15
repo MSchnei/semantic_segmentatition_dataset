@@ -12,7 +12,7 @@ analysispath = str(os.environ['parent_path']) + "/data/shared_data/data_mp2rage"
 subjnames = ['sub-001', 'sub-013', 'sub-014', 'sub-019']
 
 # set array with values that brain mask, sub mask, ventricle mask and gm have
-aryvalues = np.array([1, 2, 6, 5], dtype=np.float32)
+aryvalues = np.array([1, 2, 6, 5], dtype=np.int32)
 
 for subj in subjnames:
     print('Working on ' + subj)
@@ -54,7 +54,7 @@ for subj in subjnames:
         tempbool = nii.get_data().astype(np.bool)
 
         if indNii == 0:
-            dataOut = np.zeros((tempbool.shape), dtype=np.float32)
+            dataOut = np.zeros((tempbool.shape), dtype=np.int32)
 
         # retrieve value that should be assigned
         tempval = aryvalues[indNii]
@@ -68,6 +68,7 @@ for subj in subjnames:
 
     # save as nifti
     out = Nifti1Image(dataOut, header=niiheader, affine=niiaffine)
+    out.set_data_dtype(np.int32)
     save(out, os.path.join(dirname, subj + '_labels_v01.nii.gz'))
 
     print '... image composed.'
