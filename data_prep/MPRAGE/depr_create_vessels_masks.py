@@ -9,18 +9,18 @@ analysispath = str(os.environ['parent_path']) + "/data/shared_data/data_mprage"
 
 # set list with subj names
 subjnames = ['sub-02',
-             'sub-03',
-             'sub-05',
-             'sub-06',
-             'sub-07'
+            #  'sub-03',
+            #  'sub-05',
+            #  'sub-06',
+            #  'sub-07'
              ]
 
 # set list with tissue labels
-labellist = ['_csf', '_vessels', '_subcortical', '_sinus', '_wm',
+labellist = ['_csf', '_subcortical', '_sinus', '_wm',
              '_ventricles', '_gm']
 
 # set array with numerical values in order corresponding to labels list
-aryvalues = np.array([3, 6, 5, 7, 1, 4, 2], dtype=np.int32)
+aryvalues = np.array([3, 5, 7, 1, 4, 2], dtype=np.int32)
 
 for subj in subjnames:
     print('Working on ' + subj)
