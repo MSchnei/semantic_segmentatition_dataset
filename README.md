@@ -1,6 +1,6 @@
 # Preparation of dataset for MRI tissue class segmentation of human brain
 Collection of scripts that were used to prepare MRI image dataset for training
-a unet to perform
+a unet to perform tissue class segmentation of the human brain.
 
 # Description
 The scripts in this repository take as a starting point the following data set:
