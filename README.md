@@ -10,7 +10,7 @@ Dataset: A scalable method to improve gray matter segmentation at ultra high fie
 
 The dataset is openly available as a zenodo repository and can be downloaded here:
 ```
-https://zenodo.org/record/1117858
+[zenodo repository](https://zenodo.org/record/1117858)
 ```
 
 The scripts then perform several preprocessing steps in order to add more labels to the
