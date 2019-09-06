@@ -6,7 +6,7 @@ from scipy.ndimage import morphology
 from nibabel import load, save, Nifti1Image
 
 # set parameters
-nii = load('/media/sf_D_DRIVE/Unet/data/shared_data/data_mprage/derivatives/sub-02/labels/sub-02_all_labels_v02.nii.gz')
+nii = load('/media/sf_D_DRIVE/Unet/data/shared_data/data_mp2rage/derivatives/sub-019/segmentations/sub-019_WM_v01.nii.gz')
 
 # load data
 basename = nii.get_filename().split(os.extsep, 1)[0]
@@ -17,15 +17,15 @@ print('Data contains these unique values:')
 print(str(np.unique(data)))
 
 # perform closing
-data = morphology.binary_erosion(data, iterations=1)
-data = morphology.binary_erosion(data, iterations=1)
-data = morphology.binary_erosion(data, iterations=1)
+
+data = morphology.binary_dilation(data, iterations=1)
+data = morphology.binary_dilation(data, iterations=1)
 
 
 # save as nifti
 
 out = Nifti1Image(data, header=nii.header, affine=nii.affine)
-save(out, basename + "_ero3.nii.gz")
+save(out, basename + "_ero3_dil3.nii.gz")
 
 
 print 'Morphology operations are done.'
