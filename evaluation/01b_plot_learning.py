@@ -21,35 +21,25 @@ str_log_path = '/media/sf_D_DRIVE/Unet/MPRAGEsingle/results/'
 
 # List project names
 lst_prj = ['project23_32strides_maxpool_tranposed',
-           'project24_32strides_strided_tranposed',
-           'project25b_32strides_maxpool_subpixel',
-           'project26b_32strides_strided_subpixel']
+           'project27_32strides_maxpool_tranposed_BN-ReLU-Conv']
 # list project names for plotting
-lst_names = ['_maxpool_transposed',
-             '_strided_transposed',
-             '_maxpool_subpixel',
-             '_strided_subpixel']
+lst_names = ['Conv-BN-ReLU',
+             'BN-ReLU-Conv']
 
 # Set subfolder to training logs
 lst_evnt_trn = ['events.out.tfevents.1573752114.bi-node1.bi.17909.2570.v2',
-                'events.out.tfevents.1573786120.bi-node1.bi.20061.2930.v2',
-                'events.out.tfevents.1574005729.bi-node1.bi.14763.2633.v2',
-                'events.out.tfevents.1574031580.bi-node1.bi.15334.2993.v2']
+                'events.out.tfevents.1574245467.bi-node1.bi.23860.2297.v2']
 
 # Set subfolder to validation logs
 lst_evnt_val = ['events.out.tfevents.1573752978.bi-node1.bi.17909.33886.v2',
-                'events.out.tfevents.1573787008.bi-node1.bi.20061.36103.v2',
-                'events.out.tfevents.1574006383.bi-node1.bi.14763.34051.v2',
-                'events.out.tfevents.1574032262.bi-node1.bi.15334.36268.v2']
+                'events.out.tfevents.1574246278.bi-node1.bi.23860.31858.v2']
 
 # Set color
 lst_colors = [(0.11, 0.62, 0.47), (0.11, 0.62, 0.47),
-              (0.85, 0.37, 0.01), (0.85, 0.37, 0.01),
-              (0.46, 0.44, 0.70), (0.46, 0.44, 0.70),
-              (0.91, 0.16, 0.54), (0.91, 0.16, 0.54)]
+              (0.85, 0.37, 0.01), (0.85, 0.37, 0.01)]
 
 # Set dashes
-lst_dashes = [(''), (2, 2), (''), (2, 2), (''), (2, 2), (''), (2, 2)]
+lst_dashes = [(''), (2, 2), (''), (2, 2)]
 
 # define size guidance for loading data
 tf_size_guidance = {
@@ -90,7 +80,8 @@ for ind in range(len(lst_evnt_trn)):
 
 # %% Plot
 
-sns.set_style("whitegrid")
+# increase font size
+sns.set(font_scale=2)
 # get number of epochs
 var_num_steps = len(lst_trn_lss[0])
 ary_epochs = np.arange(var_num_steps)
@@ -108,17 +99,21 @@ for ind in range(len(lst_evnt_trn)):
     df_acc['val_acc'+lst_names[ind]] = lst_val_acc[ind]
 
 # plot losses
-sns.set_style('ticks')
 fig, ax = plt.subplots()
 fig.set_size_inches(17.5, 12.5)
-sns.lineplot(data=df_loss, palette=lst_colors, dashes=lst_dashes)
-sns.despine()
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss.png")
+sns.lineplot(data=df_loss, palette=lst_colors, dashes=lst_dashes,
+             linewidth=2.5)
+plt.xlabel("Number of Epochs")
+plt.ylabel("Loss")
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_order.svg")
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_order.png")
 
 # plot accuracies
-sns.set_style('ticks')
 fig, ax = plt.subplots()
 fig.set_size_inches(17.5, 12.5)
-sns.lineplot(data=df_acc, palette=lst_colors, dashes=lst_dashes)
-sns.despine()
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy.png")
+sns.lineplot(data=df_acc, palette=lst_colors, dashes=lst_dashes,
+             linewidth=2.5)
+plt.xlabel("Number of Epochs")
+plt.ylabel("Accuracy")
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_order.svg")
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_order.png")
