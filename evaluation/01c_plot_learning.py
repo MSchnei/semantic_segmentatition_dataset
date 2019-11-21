@@ -13,6 +13,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from load_tfevents import func_load_event
 
+
 # %% Set input parameters
 
 # Set path to log directtory
@@ -20,35 +21,25 @@ str_log_path = '/media/sf_D_DRIVE/Unet/MPRAGEsingle/results/'
 
 # List project names
 lst_prj = ['project23_32strides_maxpool_tranposed',
-           'project24_32strides_strided_tranposed',
-           'project25_32strides_maxpool_subpixel',
-           'project26_32strides_strided_subpixel']
+           'project27_32strides_maxpool_tranposed_BN-ReLU-Conv']
 # list project names for plotting
-lst_names = ['_maxpool_transposed',
-             '_strided_transposed',
-             '_maxpool_subpixel',
-             '_strided_subpixel']
+lst_names = ['Conv-BN-ReLU',
+             'BN-ReLU-Conv']
 
 # Set subfolder to training logs
 lst_evnt_trn = ['events.out.tfevents.1573752114.bi-node1.bi.17909.2570.v2',
-                'events.out.tfevents.1573786120.bi-node1.bi.20061.2930.v2',
-                'events.out.tfevents.1573833216.bi-node1.bi.5083.2639.v2',
-                'events.out.tfevents.1573878542.bi-node1.bi.6392.2999.v2']
+                'events.out.tfevents.1574245467.bi-node1.bi.23860.2297.v2']
 
 # Set subfolder to validation logs
 lst_evnt_val = ['events.out.tfevents.1573752978.bi-node1.bi.17909.33886.v2',
-                'events.out.tfevents.1573787008.bi-node1.bi.20061.36103.v2',
-                'events.out.tfevents.1573834398.bi-node1.bi.5083.34075.v2',
-                'events.out.tfevents.1573879727.bi-node1.bi.6392.36292.v2']
+                'events.out.tfevents.1574246278.bi-node1.bi.23860.31858.v2']
 
 # Set color
 lst_colors = [(0.11, 0.62, 0.47), (0.11, 0.62, 0.47),
-              (0.85, 0.37, 0.01), (0.85, 0.37, 0.01),
-              (0.46, 0.44, 0.70), (0.46, 0.44, 0.70),
-              (0.91, 0.16, 0.54), (0.91, 0.16, 0.54)]
+              (0.85, 0.37, 0.01), (0.85, 0.37, 0.01)]
 
 # Set dashes
-lst_dashes = [(''), (2, 2), (''), (2, 2), (''), (2, 2), (''), (2, 2)]
+lst_dashes = [(''), (2, 2), (''), (2, 2)]
 
 # define size guidance for loading data
 tf_size_guidance = {
@@ -114,8 +105,8 @@ sns.lineplot(data=df_loss, palette=lst_colors, dashes=lst_dashes,
              linewidth=2.5)
 plt.xlabel("Number of Epochs")
 plt.ylabel("Loss")
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_a.svg")
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_a.png")
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_order.svg")
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_order.png")
 
 # plot accuracies
 fig, ax = plt.subplots()
@@ -124,5 +115,5 @@ sns.lineplot(data=df_acc, palette=lst_colors, dashes=lst_dashes,
              linewidth=2.5)
 plt.xlabel("Number of Epochs")
 plt.ylabel("Accuracy")
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_a.svg")
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_a.png")
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_order.svg")
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_order.png")
