@@ -49,19 +49,21 @@ for (( i=0; i<${subjLen}; i++ )); do
   # move directory
   output="${parent_path}/derivatives/${subj}/segmentations/fs"
   mv "${parent_path}/${subj}/anat/fs" $output
+  # convert from fs space back to native anatomical space
+  mri_label2vol --seg $output/mri/aseg.mgz --temp $output/mri/rawavg.mgz --o $output/mri/aseg-in-rawavg.mgz --regheader $output/mri/aseg.mgz
   # convert mgz to nii.gz
-  mri_convert $output/mri/aseg.mgz  $output/aseg.nii.gz
+  mri_convert $output/mri/aseg-in-rawavg.mgz  $output/${subj}_T1w_seg.nii.gz
 
 done
 
 # cd $SUBJECTS_DIR
 # freeview -v \
-#   bert/mri/T1.mgz \
-#   bert/mri/wm.mgz \
-#   bert/mri/brainmask.mgz \
-#   bert/mri/aseg.mgz:colormap=lut:opacity=0.2 \
+#   fs/mri/T1.mgz \
+#   fs/mri/wm.mgz \
+#   fs/mri/brainmask.mgz \
+#   fs/mri/aseg.mgz:colormap=lut:opacity=0.2 \
 #   -f \
-#   bert/surf/lh.white:edgecolor=blue \
-#   bert/surf/lh.pial:edgecolor=red \
-#   bert/surf/rh.white:edgecolor=blue \
-#   bert/surf/rh.pial:edgecolor=red
+#   fs/surf/lh.white:edgecolor=blue \
+#   fs/surf/lh.pial:edgecolor=red \
+#   fs/surf/rh.white:edgecolor=blue \
+#   fs/surf/rh.pial:edgecolor=red
