@@ -20,31 +20,36 @@ from load_tfevents import func_load_event
 str_log_path = '/media/sf_D_DRIVE/Unet/MPRAGEsingle/results/'
 
 # List project names
-lst_prj = ['project23_32strides_maxpool_tranposed',
+lst_prj = ['project34_32strides_maxpool_tranposed_dense_pre',
+           'project35_32strides_maxpool_tranposed_dense_post',
            'project28_32strides_maxpool_tranposed_dense',
            'project31_32strides_maxpool_tranposed_tqsine_dense']
 # list project names for plotting
-lst_names = ['_Classic_post',
-             '_Dense_pre',
-             '_Dense_tqsine_pre']
+lst_names = ['_Dense_pre',
+             '_Dense_post',
+             '_Dense_pre_before',
+             '_Dense_tqsine_pre_before']
 
 # Set subfolder to training logs
-lst_evnt_trn = ['events.out.tfevents.1573752114.bi-node1.bi.17909.2570.v2',
+lst_evnt_trn = ['events.out.tfevents.1575050245.bi-node1.bi.3018.6516.v2',
+                'events.out.tfevents.1575081690.bi-node1.bi.3845.6516.v2',
                 'events.out.tfevents.1574447264.bi-node1.bi.10025.6516.v2',
                 'events.out.tfevents.1574684968.bi-node1.bi.16994.7453.v2']
 
 # Set subfolder to validation logs
-lst_evnt_val = ['events.out.tfevents.1573752978.bi-node1.bi.17909.33886.v2',
+lst_evnt_val = ['events.out.tfevents.1575051067.bi-node1.bi.3018.58375.v2',
+                'events.out.tfevents.1575082383.bi-node1.bi.3845.58455.v2',
                 'events.out.tfevents.1574448131.bi-node1.bi.10025.58375.v2',
                 'events.out.tfevents.1574688942.bi-node1.bi.16994.64040.v2']
 
 # Set color
 lst_colors = [(0.11, 0.62, 0.47), (0.11, 0.62, 0.47),
               (0.85, 0.37, 0.01), (0.85, 0.37, 0.01),
-              (0.46, 0.44, 0.70), (0.46, 0.44, 0.70)]
+              (0.46, 0.44, 0.70), (0.46, 0.44, 0.70),
+              (0.91, 0.16, 0.54), (0.91, 0.16, 0.54)]
 
 # Set dashes
-lst_dashes = [(''), (2, 2), (''), (2, 2), (''), (2, 2)]
+lst_dashes = [(''), (2, 2), (''), (2, 2), (''), (2, 2), (''), (2, 2)]
 
 # define size guidance for loading data
 tf_size_guidance = {
@@ -110,8 +115,8 @@ sns.lineplot(data=df_loss, palette=lst_colors, dashes=lst_dashes,
              linewidth=2.5)
 plt.xlabel("Number of Epochs")
 plt.ylabel("Loss")
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_tqsine.svg")
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_tqsine.png")
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_impl_test.svg")
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_impl_test.png")
 
 # plot accuracies
 fig, ax = plt.subplots()
@@ -120,5 +125,6 @@ sns.lineplot(data=df_acc, palette=lst_colors, dashes=lst_dashes,
              linewidth=2.5)
 plt.xlabel("Number of Epochs")
 plt.ylabel("Accuracy")
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_tqsine.svg")
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_tqsine.png")
+
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_impl_test.svg")
+fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_impl_test.png")
