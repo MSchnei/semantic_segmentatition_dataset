@@ -18,28 +18,29 @@ evalseg="/home/marian/EvaluateSegmentation/EvaluateSegmentation"
 # specify which segmentation results should be evaluated
 declare -a programme=(
 	"spm"
-  # "fs"
+  "fs"
 	"fast"
+	"project34_32strides_maxpool_tranposed_dense_pre"
 	)
 
 # list all subject names
 declare -a app=(
   "sub-02"
-  "sub-03"
-  "sub-05"
-  "sub-06"
-  "sub-07"
+  # "sub-03"
+  # "sub-05"
+  # "sub-06"
+  # "sub-07"
   )
 
 # set segmentation labels
 declare -a tissue=(
-	"_WM"
-  "_GM"
-  "_CSF"
-	"_ventricles"
-  "_sagsinus"
-  "_subcortex"
-	"_vessels"
+	"WM"
+	"GM"
+	"CSF"
+	"ventricle"
+	"subcortex"
+	"vessel"
+	"sinus"
   )
 
 # derive length of different lists
@@ -63,16 +64,22 @@ for (( j=0; j<${subjLen}; j++ )); do
 			tis=${tissue[i]}
 
 		  # deduce path name for ground truth
-		  truth="${parent_path}/derivatives/${subj}/labeled/${subj}_labels_v0?.nii.gz"
+		  truth="${parent_path}/derivatives/${subj}/segmentations/gt/${subj}_T1w_${tis}.nii.gz"
 	    # deduce name for segmentation result file
-	    segm="${parent_path}/derivatives/${subj}/segmentations/${switch}/${subj}_T1w_seg.nii.gz"
+	    segm="${parent_path}/derivatives/${subj}/segmentations/${switch}/${subj}_T1w_${tis}.nii.gz"
 
-	    # evaluate the segmentation
-	    command="${evalseg} ${truth} ${segm} "
-	    command+="-use DICE,VOLSMTY " # DICE,VOLSMTY,AVGDIST,HDRFDST@0.95@
-	    command+="-xml ${parent_path}/derivatives/${subj}/evaluations/${switch}_seg.xml"
-	    echo "${command}"
-	    ${command}
+			# check whether file exists
+			if test -f "$segm"; then
+				# evaluate the segmentation
+				command="${evalseg} ${truth} ${segm} "
+				command+="-use DICE,VOLSMTY " # DICE,VOLSMTY,AVGDIST,HDRFDST@0.95@
+				command+="-xml ${parent_path}/derivatives/${subj}/evaluations/${subj}_${switch}_${tis}.xml"
+				echo "${command}"
+				${command}
+
+			else
+    		echo "$segm does not exist"
+			fi
 
 		done
 	done

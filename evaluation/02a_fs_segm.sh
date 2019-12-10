@@ -15,11 +15,11 @@ parent_path="${parent_path}/data/segmentation_data/data_mprage"
 
 # list all subject names
 declare -a app=(
-  "sub-02"
+  # "sub-02"
   "sub-03"
-  "sub-05"
-  "sub-06"
-  "sub-07"
+  # "sub-05"
+  # "sub-06"
+  # "sub-07"
                 )
 
 # create division images for all subjects

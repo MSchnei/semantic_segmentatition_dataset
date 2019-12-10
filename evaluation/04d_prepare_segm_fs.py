@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""Create seperate, binarised nii files for each tissue type in fs segm."""
+
 
 import os
 import numpy as np
@@ -14,35 +16,36 @@ switch = 'fs'
 
 # list all subject names
 app = [
-  'sub-02',
-#  'sub-03',
-  'sub-05',
-  'sub-06',
-#  'sub-07'
+   'sub-02',
+   'sub-03',
+   'sub-05',
+   'sub-06',
+   'sub-07'
   ]
 
 # set segmentation labels
 tissue = [
     'WM',
     'GM',
-    'CSF',
-    'vessel',
+#    'CSF',
+#    'vessel',
     'ventricle',
     'subcortex',
-    'sinus']
+#    'sinus'
+    ]
 
 # set curent integer corresponding to segmentation label
 label = [
     [2, 41, 250, 251, 252, 253, 254, 255],
     [3, 42],
-    [24, 122, 257, 701],
-    [30, 62],
+#    [24, 122, 257, 701],
+#    [30, 62],
     [4, 43, 72],
     [6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19, 20, 24, 26, 27, 28,
      45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 58, 59, 60,
      15, 192],
-    [262]]
-
+#    [262]
+    ]
 
 # derive length of different lists
 subjLen = len(app)
