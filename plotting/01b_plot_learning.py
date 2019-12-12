@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 18 10:27:16 2019
-
-@author: marian
-"""
+"""Compare maxpool vs strided and tranposed vs subpixel conv (8 x channels)."""
 
 import os
 import numpy as np

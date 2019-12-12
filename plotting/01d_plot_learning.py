@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 18 10:27:16 2019
+"""Compare classic U-Net vs dense U-Net (Tiramisu Net)."""
 
-@author: marian
-"""
 
 import os
 import numpy as np

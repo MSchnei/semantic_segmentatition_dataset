@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 18 10:27:16 2019
-
-@author: marian
-"""
+"""Compare dense net before and after code change (deleted BN after concat)."""
 
 import os
 import numpy as np

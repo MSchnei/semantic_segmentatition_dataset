@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 18 10:27:16 2019
+"""Compare classic vs dense U-Net and pre- vs post-activation."""
 
-@author: marian
-"""
 
 import os
 import numpy as np

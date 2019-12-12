@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 18 10:27:16 2019
+"""Compare Conv-BN-ReLU ('post') vs BN-ReLU-Conv ('pre')."""
 
-@author: marian
-"""
 
 import os
 import numpy as np

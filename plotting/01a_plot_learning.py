@@ -1,10 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Nov 18 10:27:16 2019
-
-@author: marian
-"""
+"""Compare maxpool vs strided conv and tranposed vs subpixel conv."""
 
 import os
 import numpy as np
