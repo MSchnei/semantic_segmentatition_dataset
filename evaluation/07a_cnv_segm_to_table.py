@@ -18,7 +18,6 @@ Note1: assumes that evaluate segmentation file was run
 
 import os
 import xmltodict
-import pandas as pd
 from tabulate import tabulate
 
 # %%
