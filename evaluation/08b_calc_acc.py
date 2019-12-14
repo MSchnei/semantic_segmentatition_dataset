@@ -46,14 +46,17 @@ resultsF1 = []
 tns_gt = func_nii_to_tf_tensor(str_gt, dtype=np.int32)
 
 # loop over models
-for model_name, sg_model in zip(lst_model_headers, lst_sg_models):
+for indModel, sg_model in enumerate(lst_sg_models):
+    model_name = lst_model_headers[indModel]
+    print('---Working on model: ' + model_name)
     
     # Append model name to lists for row header
     resultsAcc.append([model_name])
     resultsF1.append([model_name])
     
     # loop over augmentations
-    for ind_aug, aug_stride in enumerate(lst_aug_strides):
+    for aug_stride in lst_aug_strides:
+        print('---Working on augmentation: ' + aug_stride)
 
         # derive path to predicted segmentations
         str_ps = os.path.join(str_sg_path, sg_model, aug_stride,
@@ -84,8 +87,8 @@ for model_name, sg_model in zip(lst_model_headers, lst_sg_models):
         var_f1 = obj_f1.result().numpy()
         
         # Append calculated metrics to metrics list
-        resultsAcc[ind_aug].extend(["%.4f" % var_acc])
-        resultsF1[ind_aug].extend(["%.4f" % var_f1])
+        resultsAcc[indModel].extend(["%.4f" % var_acc])
+        resultsF1[indModel].extend(["%.4f" % var_f1])
 
 
 # %% print tables
