@@ -30,7 +30,7 @@ lst_sg_models = ['project32_32strides_maxpool_tranposed_classic_pre',
 lst_model_headers = ['UNet', 'Tiramisu']
 
 # list the strides (test-time augmentation rates that should be considered)
-lst_aug_strides = ['stride_64', 'stride_32', 'stride_16']
+lst_aug_strides = ['stride_64', 'stride_32', 'stride_16', 'stride_8']
 
 # set path to ground truth
 str_gt = os.path.join(str_gt_path, 'derivatives', str_subj, 'labeled',

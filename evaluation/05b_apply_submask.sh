@@ -20,7 +20,8 @@ declare -a programme=(
 	"spm"
   "fs"
 	"fast"
-	"project34_32strides_maxpool_tranposed_dense_pre"
+	"project32_32strides_maxpool_tranposed_classic_pre"
+  "project43_32strides_maxpool_tranposed_dense_dr_0p05"
 	)
 
 # list all subject names

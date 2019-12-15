@@ -16,20 +16,21 @@ parent_path="${parent_path}/data/segmentation_data/data_mprage"
 
 # specify which segmentation results should be masked
 declare -a programme=(
-	"gt"
-	"spm"
-  "fs"
-	"fast"
-	"project34_32strides_maxpool_tranposed_dense_pre"
+	# "gt"
+	# "spm"
+  # "fs"
+	# "fast"
+	"project32_32strides_maxpool_tranposed_classic_pre"
+	"project43_32strides_maxpool_tranposed_dense_dr_0p05"
 	)
 
 # list all subject names
 declare -a app=(
   "sub-02"
-  "sub-03"
-  "sub-05"
-  "sub-06"
-  "sub-07"
+  # "sub-03"
+  # "sub-05"
+  # "sub-06"
+  # "sub-07"
                 )
 
 # set segmentation labels

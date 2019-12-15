@@ -17,10 +17,11 @@ evalseg="/home/marian/EvaluateSegmentation/EvaluateSegmentation"
 
 # specify which segmentation results should be evaluated
 declare -a programme=(
-	"spm"
-  	"fs"
-	"fast"
-	"project34_32strides_maxpool_tranposed_dense_pre"
+	# "spm"
+  # "fs"
+	# "fast"
+	"project32_32strides_maxpool_tranposed_classic_pre"
+	"project43_32strides_maxpool_tranposed_dense_dr_0p05"
 	)
 
 # list all subject names
