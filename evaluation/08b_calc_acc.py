@@ -25,12 +25,13 @@ str_sg_path = os.path.join(str_parent_path, 'MPRAGEsingle', 'predicted_nii')
 
 # list the segmentation models that should be considered
 lst_sg_models = ['project32_32strides_maxpool_tranposed_classic_pre',
-                 'project43_32strides_maxpool_tranposed_dense_dr_0p05']
+                 'project43_32strides_maxpool_tranposed_dense_dr_0p05',
+                 'project47_32strides_maxpool_tranposed_dense_dr_0p00']
 # list header descriptions for every model
-lst_model_headers = ['UNet', 'Tiramisu']
+lst_model_headers = ['UNet', 'Tiramisu51',  'Tiramisu68']
 
 # list the strides (test-time augmentation rates that should be considered)
-lst_aug_strides = ['stride_64', 'stride_32', 'stride_16', 'stride_8']
+lst_aug_strides = ['stride_64', 'stride_32', 'stride_16']
 
 # set path to ground truth
 str_gt = os.path.join(str_gt_path, 'derivatives', str_subj, 'labeled',
