@@ -12,7 +12,7 @@ from load_tfevents import func_load_event
 # %% Set input parameters
 
 # Set path to log directtory
-str_log_path = '/Users/marian/Documents/Unet/MPRAGEsingle/results/'  # '/media/sf_D_DRIVE/Unet/MPRAGEsingle/results/'
+str_log_path = '/media/sf_D_DRIVE/Unet/MPRAGEsingle/results/'
 
 # List project names
 lst_prj = ['project34_32strides_maxpool_tranposed_dense_pre',
@@ -110,8 +110,8 @@ sns.lineplot(data=df_loss, palette=lst_colors, dashes=lst_dashes,
              linewidth=2.5)
 plt.xlabel("Number of Epochs")
 plt.ylabel("Loss")
-fig.savefig("/Users/marian/Documents/Unet/presentation/results/plots/loss_model_Dense_IN_BN.svg")
-fig.savefig("/Users/marian/Documents/Unet/presentation/results/plots/loss_model_Dense_IN_BN.png")
+fig.savefig("/media/sf_D_DRIVE/Unet/MPRAGEsingle/results/plots/loss_model_Dense_IN_BN.svg")
+fig.savefig("/media/sf_D_DRIVE/Unet/MPRAGEsingle/results/plots/loss_model_Dense_IN_BN.png")
 
 # plot accuracies
 fig, ax = plt.subplots()
@@ -121,5 +121,5 @@ sns.lineplot(data=df_acc, palette=lst_colors, dashes=lst_dashes,
 plt.xlabel("Number of Epochs")
 plt.ylabel("Accuracy")
 
-fig.savefig("/Users/marian/Documents/Unet/presentation/results/plots/accuracy_model_Dense_IN_BN.svg")
-fig.savefig("/Users/marian/Documents/Unet/presentation/results/plots/accuracy_model_Dense_IN_BN.png")
+fig.savefig("/media/sf_D_DRIVE/Unet/MPRAGEsingle/results/plots/accuracy_model_Dense_IN_BN.svg")
+fig.savefig("/media/sf_D_DRIVE/Unet/MPRAGEsingle/results/plots/accuracy_model_Dense_IN_BN.png")
