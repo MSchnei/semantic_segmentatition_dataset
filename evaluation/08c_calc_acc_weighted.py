@@ -24,11 +24,11 @@ str_gt_path = os.path.join(str_parent_path, 'data', 'segmentation_data',
 str_sg_path = os.path.join(str_parent_path, 'MPRAGEsingle', 'predicted_nii')
 
 # list the segmentation models that should be considered
-lst_sg_models = ['project32_32strides_maxpool_tranposed_classic_pre',
-                 'project43_32strides_maxpool_tranposed_dense_dr_0p05',
-                 'project48_32strides_maxpool_tranposed_denseExt_dr_0p05']
+lst_sg_models = ['project50_32strides_maxpool_tranposed_classic_dr_0p05_weighted',
+                 'project51_32strides_maxpool_tranposed_dense_dr_0p05_weighted',
+                 'project52_32strides_maxpool_tranposed_denseExt_dr_0p05_weighted']
 # list header descriptions for every model
-lst_model_headers = ['UNet', 'Tiramisu51',  'Tiramisu68']
+lst_model_headers = ['wUNet', 'wTiramisu51',  'wTiramisu68']
 
 # list the strides (test-time augmentation rates that should be considered)
 lst_aug_strides = ['stride_64', 'stride_32', 'stride_16']
@@ -57,7 +57,7 @@ for indModel, sg_model in enumerate(lst_sg_models):
     
     # loop over augmentations
     for aug_stride in lst_aug_strides:
-        print('---Working on augmentation: ' + aug_stride)
+        print('------Working on augmentation: ' + aug_stride)
 
         # derive path to predicted segmentations
         str_ps = os.path.join(str_sg_path, sg_model, aug_stride,
@@ -82,7 +82,7 @@ for indModel, sg_model in enumerate(lst_sg_models):
         tns_gt_hot = tf.one_hot(tns_gt, 8, dtype=tns_gt.dtype)
         tns_ps_hot = tf.one_hot(tns_ps, 8, dtype=tns_ps.dtype)
         # Calculate f1 score, set average None or 'weighted'
-        obj_f1 = tfa.metrics.F1Score(num_classes=8, average='weighted')
+        obj_f1 = tfa.metrics.F1Score(num_classes=8, average='micro')
         obj_f1.update_state(tf.reshape(tns_gt_hot, [-1, 8]),
                             tf.reshape(tns_ps_hot, [-1, 8]))
         var_f1 = obj_f1.result().numpy()

@@ -16,21 +16,22 @@ parent_path="${parent_path}/data/segmentation_data/data_mprage"
 
 # specify which segmentation results should be evaluated
 declare -a programme=(
-  "gt"
-	"spm"
-  "fs"
-	"fast"
-	"project32_32strides_maxpool_tranposed_classic_pre"
-  "project43_32strides_maxpool_tranposed_dense_dr_0p05"
+  # "gt"
+	# "spm"
+  # "fs"
+	# "fast"
+	"project50_32strides_maxpool_tranposed_classic_dr_0p05_weighted"
+  "project51_32strides_maxpool_tranposed_dense_dr_0p05_weighted"
+  "project52_32strides_maxpool_tranposed_denseExt_dr_0p05_weighted"
 	)
 
 # list all subject names
 declare -a app=(
   "sub-02"
-  "sub-03"
-  "sub-05"
-  "sub-06"
-  "sub-07"
+  # "sub-03"
+  # "sub-05"
+  # "sub-06"
+  # "sub-07"
                 )
 
 # set segmentation labels

@@ -27,10 +27,11 @@ dirStr = os.path.join(str(os.environ['parent_path']),
 
 # specify which programmes were used for evaluating the segmentation
 switchLst = ['spm', 'fast', 'fs',
-             'project32_32strides_maxpool_tranposed_classic_pre',
-             'project43_32strides_maxpool_tranposed_dense_dr_0p05']
+             'project50_32strides_maxpool_tranposed_classic_dr_0p05_weighted',
+             'project51_32strides_maxpool_tranposed_dense_dr_0p05_weighted',
+             'project52_32strides_maxpool_tranposed_denseExt_dr_0p05_weighted']
 # write how programme names should appear in output table
-nameLst = ['SPM', 'FAST', 'FS', 'Unet', 'DenseNet']
+nameLst = ['SPM', 'FAST', 'FS', '3DUnet', 'TiramisuNet51', 'TiramisuNet68']
 
 # specify which subjects were evaluated
 subjLst = ['sub-02']  # , 'sub-03', 'sub-05', 'sub-06', 'sub-07']
