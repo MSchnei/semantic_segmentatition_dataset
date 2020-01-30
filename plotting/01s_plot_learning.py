@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Compare dropout rate in classic U-Net, trained with weighted loss."""
+"""Compare dropout rate in denseExt U-Net, trained with weighted loss."""
 
 import os
 import numpy as np
@@ -15,48 +15,43 @@ from load_tfevents import func_load_event
 str_log_path = '/Users/Marian/Documents/Unet/MPRAGEsingle/results/'
 
 # List project names
-lst_prj = ['project50_32strides_maxpool_tranposed_classic_dr_0p00_weighted',
-           'project50_32strides_maxpool_tranposed_classic_dr_0p05_weighted',
-           'project50a_32strides_maxpool_tranposed_classic_dr_0p10_weighted',
-           'project50b_32strides_maxpool_tranposed_classic_dr_0p15_weighted',
-           'project50c_32strides_maxpool_tranposed_classic_dr_0p20_weighted',
-           'project50d_32strides_maxpool_tranposed_classic_dr_0p25_weighted']
+lst_prj = ['project52_32strides_maxpool_tranposed_denseExt_dr_0p05_weighted',
+           'project52a_32strides_maxpool_tranposed_denseExt_dr_0p10_weighted',
+           'project52b_32strides_maxpool_tranposed_denseExt_dr_0p15_weighted',
+           'project52c_32strides_maxpool_tranposed_denseExt_dr_0p20_weighted',
+           'project52d_32strides_maxpool_tranposed_denseExt_dr_0p25_weighted']
 
 # list project names for plotting
-lst_names = ['_classic_weighted_dr0p00',
-             '_classic_weighted_dr0p05',
-             '_classic_weighted_dr0p10',
-             '_classic_weighted_dr0p15',
-             '_classic_weighted_dr0p20',
-             '_classic_weighted_dr0p25']
+lst_names = ['_denseExt_weighted_dr0p05',
+             '_denseExt_weighted_dr0p10',
+             '_denseExt_weighted_dr0p15',
+             '_denseExt_weighted_dr0p20',
+             '_denseExt_weighted_dr0p25']
 
 # Set subfolder to training logs
-lst_evnt_trn = ['events.out.tfevents.1576583873.bi-node1.bi.31630.2779.v2',
-                'events.out.tfevents.1576583873.bi-node1.bi.31630.2779.v2',
-                'events.out.tfevents.1578638835.bi-node1.bi.4005.2779.v2',
-                'events.out.tfevents.1578683388.bi-node1.bi.6882.2779.v2',
-                'events.out.tfevents.1578724298.bi-node1.bi.8292.2779.v2',
-                'events.out.tfevents.1578765414.bi-node1.bi.10144.2779.v2']
+lst_evnt_trn = ['events.out.tfevents.1578040711.bi-node1.bi.10803.11288.v2',
+                'events.out.tfevents.1578913784.bi-node1.bi.15611.11288.v2',
+                'events.out.tfevents.1579009737.bi-node1.bi.18506.11288.v2',
+                'events.out.tfevents.1579012257.bi-node1.bi.18506.83834.v2',
+                'events.out.tfevents.1579201638.bi-node1.bi.24387.11288.v2']
 
 # Set subfolder to validation logs
-lst_evnt_val = ['events.out.tfevents.1576584907.bi-node1.bi.31630.33672.v2',
-                'events.out.tfevents.1576584907.bi-node1.bi.31630.33672.v2',
-                'events.out.tfevents.1578639879.bi-node1.bi.4005.33672.v2',
-                'events.out.tfevents.1578684420.bi-node1.bi.6882.33672.v2',
-                'events.out.tfevents.1578725338.bi-node1.bi.8292.33672.v2',
-                'events.out.tfevents.1578766450.bi-node1.bi.10144.33672.v2']
+lst_evnt_val = ['events.out.tfevents.1578043231.bi-node1.bi.10803.83834.v2',
+                'events.out.tfevents.1578916305.bi-node1.bi.15611.83834.v2',
+                'events.out.tfevents.1579012257.bi-node1.bi.18506.83834.v2',
+                'events.out.tfevents.1579108205.bi-node1.bi.21552.83834.v2',
+                'events.out.tfevents.1579204158.bi-node1.bi.24387.83834.v2']
 
 # Set color
 lst_colors = ['#e41a1c', '#e41a1c',
               '#377eb8', '#377eb8',
               '#4daf4a', '#4daf4a',
               '#984ea3', '#984ea3',
-              '#ff7f00', '#ff7f00',
-              '#ffff33', '#ffff33']
+              '#ff7f00', '#ff7f00']
 
 # Set dashes
 lst_dashes = [(''), (2, 2), (''), (2, 2), (''), (2, 2), (''), (2, 2),
-              (''), (2, 2), (''), (2, 2)]
+              (''), (2, 2)]
 
 # define size guidance for loading data
 tf_size_guidance = {
@@ -122,8 +117,8 @@ sns.lineplot(data=df_loss, palette=lst_colors, dashes=lst_dashes,
              linewidth=2.5)
 plt.xlabel("Number of Epochs")
 plt.ylabel("Loss")
-fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/loss_dr_classic_weighted.svg")
-fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/loss_dr_classic_weighted.png")
+fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/loss_dr_denseExt_weighted.svg")
+fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/loss_dr_denseExt_weighted.png")
 
 # plot accuracies
 fig, ax = plt.subplots()
@@ -133,5 +128,5 @@ sns.lineplot(data=df_acc, palette=lst_colors, dashes=lst_dashes,
 plt.xlabel("Number of Epochs")
 plt.ylabel("Accuracy")
 
-fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/accuracy_dr_classic_weighted.svg")
-fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/accuracy_dr_classic_weighted.png")
+fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/accuracy_dr_denseExt_weighted.svg")
+fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/accuracy_dr_denseExt_weighted.png")

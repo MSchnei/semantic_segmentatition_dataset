@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Compare dropout rate in dense extended"""
+"""Compare different norm and SE schemes for TiramisuNet, weighted, dr 0.05."""
 
 import os
 import numpy as np
@@ -12,35 +12,70 @@ from load_tfevents import func_load_event
 # %% Set input parameters
 
 # Set path to log directtory
-str_log_path = '/media/sf_D_DRIVE/Unet/MPRAGEsingle/results/'
+str_log_path = '/Users/Marian/Documents/Unet/MPRAGEsingle/results/'
 
 # List project names
-lst_prj = ['project47_32strides_maxpool_tranposed_denseExt_dr_0p00',
-           'project48_32strides_maxpool_tranposed_denseExt_dr_0p05',
-           'project49_32strides_maxpool_tranposed_denseExt_dr_0p10']
+lst_prj = ['project53b_32strides_maxpool_tranposed_dense_IN_nose_weighted',
+           'project54b_32strides_maxpool_tranposed_dense_IN_cse_weighted',
+           'project55b_32strides_maxpool_tranposed_dense_IN_pe_weighted',
+           'project56b_32strides_maxpool_tranposed_dense_INLN_nose_weighted',
+           'project57b_32strides_maxpool_tranposed_dense_INLN_cse_weighted',
+           'project58b_32strides_maxpool_tranposed_dense_INLN_pe_weighted',
+           'project59b_32strides_maxpool_tranposed_dense_LN_nose_weighted',
+           'project60b_32strides_maxpool_tranposed_dense_LN_cse_weighted',
+           'project61b_32strides_maxpool_tranposed_dense_LN_pe_weighted',
+           ]
 
 # list project names for plotting
-lst_names = ['_denseExt_dr0p00',
-             '_denseExt_dr0p05',
-             '_denseExt_dr0p10']
+lst_names = ['_dense_IN_nose_w',
+             '_dense_IN_cse_w',
+             '_dense_IN_pe_w',
+             '_dense_INLN_nose_w',
+             '_dense_INLN_cse_w',
+             '_dense_INLN_pe_w',
+             '_dense_LN_nose_w',
+             '_dense_LN_cse_w',
+             '_dense_LN_pe_w'
+             ]
 
 # Set subfolder to training logs
-lst_evnt_trn = ['events.out.tfevents.1577726581.bi-node1.bi.1448.9266.v2',
-                'events.out.tfevents.1577813138.bi-node1.bi.4124.11200.v2',
-                'events.out.tfevents.1577909073.bi-node1.bi.6900.11200.v2']
+lst_evnt_trn = ['events.out.tfevents.1579297598.bi-node1.bi.27178.7922.v2',
+                'events.out.tfevents.1579333136.bi-node1.bi.28396.7948.v2',
+                'events.out.tfevents.1579366512.bi-node1.bi.30148.7997.v2',
+                'events.out.tfevents.1579401688.bi-node1.bi.31020.9726.v2',
+                'events.out.tfevents.1579447158.bi-node1.bi.534.9752.v2',
+                'events.out.tfevents.1579491018.bi-node1.bi.1474.9801.v2',
+                'events.out.tfevents.1579576142.bi-node1.bi.4363.5810.v2',
+                'events.out.tfevents.1579654602.bi-node1.bi.7119.5836.v2',
+                'events.out.tfevents.1579733101.bi-node1.bi.9795.5885.v2']
 
 # Set subfolder to validation logs
-lst_evnt_val = ['events.out.tfevents.1577728805.bi-node1.bi.1448.75585.v2',
-                'events.out.tfevents.1577815655.bi-node1.bi.4124.83661.v2',
-                'events.out.tfevents.1577911590.bi-node1.bi.6900.83661.v2']
+lst_evnt_val = ['events.out.tfevents.1579298546.bi-node1.bi.27178.64050.v2',
+                'events.out.tfevents.1579334025.bi-node1.bi.28396.63858.v2',
+                'events.out.tfevents.1579367448.bi-node1.bi.30148.64285.v2',
+                'events.out.tfevents.1579402893.bi-node1.bi.31020.83058.v2',
+                'events.out.tfevents.1579448320.bi-node1.bi.534.82866.v2',
+                'events.out.tfevents.1579492220.bi-node1.bi.1474.83293.v2',
+                'events.out.tfevents.1579577174.bi-node1.bi.4363.57010.v2',
+                'events.out.tfevents.1579655596.bi-node1.bi.7119.56818.v2',
+                'events.out.tfevents.1579734129.bi-node1.bi.9795.57245.v2']
 
 # Set color
-lst_colors = ['#1b9e77', '#1b9e77',
-              '#d95f02', '#d95f02',
-              '#7570b3', '#7570b3']
+lst_colors = ['#6baed6', '#6baed6',
+              '#3182bd', '#3182bd',
+              '#08519c', '#08519c',
+              '#74c476', '#74c476',
+              '#31a354', '#31a354',
+              '#006d2c', '#006d2c',
+              '#fd8d3c', '#fd8d3c',
+              '#e6550d', '#e6550d',
+              '#a63603', '#a63603',
+              ]
 
 # Set dashes
-lst_dashes = [(''), (2, 2), (''), (2, 2), (''), (2, 2)]
+lst_dashes = [(''), (2, 2), (''), (2, 2), (''), (2, 2),
+              (''), (2, 2), (''), (2, 2), (''), (2, 2),
+              (''), (2, 2), (''), (2, 2), (''), (2, 2)]
 
 # define size guidance for loading data
 tf_size_guidance = {
@@ -106,8 +141,9 @@ sns.lineplot(data=df_loss, palette=lst_colors, dashes=lst_dashes,
              linewidth=2.5)
 plt.xlabel("Number of Epochs")
 plt.ylabel("Loss")
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_dr_denseExt.svg")
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/loss_dr_denseExt.png")
+ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/loss_norm_vs_se_weighted_dr0p05.svg", bbox_inches="tight")
+fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/loss_norm_vs_se_weighted_dr0p05.png", bbox_inches="tight")
 
 # plot accuracies
 fig, ax = plt.subplots()
@@ -116,6 +152,7 @@ sns.lineplot(data=df_acc, palette=lst_colors, dashes=lst_dashes,
              linewidth=2.5)
 plt.xlabel("Number of Epochs")
 plt.ylabel("Accuracy")
+ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/accuracy_norm_vs_se_weighted_dr0p05.svg", bbox_inches="tight")
+fig.savefig("/Users/Marian/Documents/Unet/presentation/results/plots/accuracy_norm_vs_se_weighted_dr0p05.png", bbox_inches="tight")
 
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_dr_denseExt.svg")
-fig.savefig("/media/sf_D_DRIVE/Unet/presentation/results/plots/accuracy_dr_denseExt.png")
